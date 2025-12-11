@@ -10,6 +10,17 @@ load_dotenv()
 openai_api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=openai_api_key)
 
+# --- CONFIGURATION ---
+# Try changing this to "junior-agent-secret" to see the Refund fail!
+API_TOKEN = os.getenv("API_KEY")
+
+# Base Headers that include the Security Token
+HEADERS = {
+    "Authorization": f"Bearer {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+
+
 # 1. Define the Tools (The Schema)
 # We now include BOTH "get_order" and "process_refund"
 tools = [
@@ -53,21 +64,27 @@ def execute_tool_call(tool_call):
 
     try:
         if fn_name == "get_order":
-            # GET Request
-            order_id = args.get("order_id")
-            response = requests.get(f"http://localhost:8000/orders/{order_id}")
-            return response.json()
+            # Pass HEADERS here
+            response = requests.get(
+                f"http://localhost:8000/orders/{args.get('order_id')}",
+                headers=HEADERS 
+            )
         
         elif fn_name == "process_refund":
-            # POST Request (Action!)
-            # We pass 'json=args' because requests will automatically jsonify the dict
-            response = requests.post(f"http://localhost:8000/refunds", json=args)
+            # Pass HEADERS here
+            response = requests.post(
+                f"http://localhost:8000/refunds", 
+                json=args,
+                headers=HEADERS
+            )
+        
+        # Handle Security Errors nicely for the LLM
+        if response.status_code == 401:
+            return "Error: Authentication Failed. Check your token."
+        if response.status_code == 403:
+            return "Error: Permission Denied. You do not have the scope to perform this action."
             
-            # If the server throws a 500 or 404, we want to know
-            if response.status_code != 200:
-                return {"error": f"API Error {response.status_code}: {response.text}"}
-                
-            return response.json()
+        return response.json()
             
     except Exception as e:
         return str(e)
