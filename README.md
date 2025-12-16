@@ -1,5 +1,3 @@
-# Agentic FDE Demo: Secure AI-to-Enterprise Integration
-
 ## Overview
 This project is a hands-on demonstration of a "Forward Deployed Engineer (FDE)" architecture. It showcases how to bridge the gap between a deterministic Enterprise System (using **FastAPI** and **Pydantic**) and a probabilistic AI Agent (using **OpenAI Function Calling**).
 
@@ -16,17 +14,17 @@ Crucially, this demo implements **Zero Trust Security**. The AI Agent is not giv
 
 ---
 
-## Architecture Diagram
+## Architecture Diagram (Part 1: REST API)
 
-This diagram illustrates the secure request flow. Note that the LLM *decides* the action, but the Python Runtime *injects* the credentials before hitting the API.
+This diagram illustrates the secure request flow for the REST API demo. Note that the LLM *decides* the action, but the Python Runtime *injects* the credentials before hitting the API.
 
-```mermaid
+`mermaid
 sequenceDiagram
-    participant U as 👤 User
-    participant A as 🤖 Python Agent Runtime
-    participant L as 🧠 OpenAI LLM
-    participant S as 🏢 Enterprise API (FastAPI)
-    participant D as 🗄️ Database (Mock)
+    participant U as &#128100; User
+    participant A as &#129302; Python Agent Runtime
+    participant L as &#129504; OpenAI LLM
+    participant S as &#127970; Enterprise API (FastAPI)
+    participant D as &#128452; Database (Mock)
 
     U->>A: "Refund order ORD-123"
     
@@ -36,8 +34,8 @@ sequenceDiagram
 
     A->>S: POST /refunds (Header: Bearer Token)
     
-    Note right of S: 🔒 Security Check 1: Verify Token
-    Note right of S: 🔒 Security Check 2: Verify "write" Scope
+    Note right of S: &#128274; Security Check 1: Verify Token
+    Note right of S: &#128274; Security Check 2: Verify "write" Scope
     
     S->>D: Update Order Data
     D-->>S: Return Success
@@ -46,22 +44,20 @@ sequenceDiagram
     A-->>U: Final Answer: "Refund processed."
 ```
 
-Prerequisites
-Python 3.10+: Ensure Python is installed and accessible via terminal.
+## Prerequisites
+* **Python 3.10+**: Ensure Python is installed and accessible via terminal.
+* **OpenAI API Key**: You need a valid API key from `platform.openai.com`.
 
-OpenAI API Key: You need a valid API key from platform.openai.com.
+## Setup & Installation
 
-Setup & Installation
-Clone or Create Project Folder
-
-Bash
-
+### Clone or Create Project Folder
+```bash
 mkdir agent-fde-demo
 cd agent-fde-demo
-Create and Activate Virtual Environment
+```
 
-Bash
-
+### Create and Activate Virtual Environment
+```bash
 # Create venv
 python3 -m venv venv
 
@@ -69,103 +65,161 @@ python3 -m venv venv
 source venv/bin/activate
 # Activate it (Windows)
 # .\venv\Scripts\activate
-Install Dependencies
+```
 
-Bash
+### Install Dependencies
+```bash
+pip install fastapi uvicorn pydantic openai requests mcp anthropic
+```
 
-pip install fastapi uvicorn pydantic openai requests
-Set OpenAI API Key
+### Set OpenAI API Key
+* **Mac/Linux:** `export OPENAI_API_KEY="sk-your-key-here"`
+* **Windows:** `$env:OPENAI_API_KEY = "sk-your-key-here"`
 
-Mac/Linux: export OPENAI_API_KEY="sk-your-key-here"
+---
 
-Windows: $env:OPENAI_API_KEY = "sk-your-key-here"
-
-Running the Demo
+## Part 1: Running the REST API Demo
 This demo requires two separate terminal windows running simultaneously.
 
-🖥️ Terminal 1: The Secure Server
+### &#128421;&#65039; Terminal 1: The Secure Server
 This represents the Enterprise API with Role-Based Access Control.
-
 Navigate to the folder and activate venv.
 
 Run the server:
-
-Bash
-
+```bash
 python main.py
-You should see: Uvicorn running on http://0.0.0.0:8000
+```
+*You should see: Uvicorn running on http://0.0.0.0:8000*
 
-🤖 Terminal 2: The Authenticated Agent
+### &#129302; Terminal 2: The Authenticated Agent
 This represents the Client Application.
-
 Open a new terminal, navigate to folder, activate venv.
 
 Run the agent:
-
-Bash
-
+```bash
 python agent.py
-Testing Security Scenarios
-This architecture demonstrates RBAC (Role-Based Access Control). You can modify agent.py to simulate different security levels.
+```
 
-Scenario A: The "Super Agent" (Default)
-Token: super-agent-secret
+### Testing Security Scenarios
+This architecture demonstrates RBAC (Role-Based Access Control). You can modify `agent.py` to simulate different security levels.
 
-Scopes: read:orders, write:refunds
+**Scenario A: The "Super Agent" (Default)**
+* Token: `super-agent-secret`
+* Scopes: `read:orders`, `write:refunds`
+* **Result:** The Agent successfully processes the refund.
 
-Result: The Agent successfully processes the refund.
-
-Scenario B: The "Junior Agent" (Permission Denied)
-Open agent.py.
-
-Change line 10 to: API_TOKEN = "junior-agent-secret"
-
-Run python agent.py.
-
-Result:
-
-Plaintext
-
-🤖 LLM Thought: Call process_refund
-🔌 Executing: process_refund...
-✅ API Result: Error: Permission Denied. You do not have the scope to perform this action.
+**Scenario B: The "Junior Agent" (Permission Denied)**
+1.  Open `agent.py`.
+2.  Change line 10 to: `API_TOKEN = "junior-agent-secret"`
+3.  Run `python agent.py`.
+4.  **Result:**
+    ```
+    &#129302; LLM Thought: Call process_refund
+    &#128268; Executing: process_refund...
+    &#9989; API Result: Error: Permission Denied. You do not have the scope to perform this action.
+    ```
 This proves the API is protecting the database even if the AI tries to access it.
 
-Key Filesmain.py: The FastAPI server. It defines the Security Dependencies (has_scope), the Pydantic models, and the mocked database.agent.py: The OpenAI Client. It manages the tool definitions, handles the HTTP requests library, and injects the Authorization headers.🧩 Part 2: Model Context Protocol (MCP) LabThis section covers the Model Context Protocol (MCP) implementation. Unlike the HTTP/Rest implementation above, this demonstrates the standardized Host <-> Client <-> Server architecture used by tools like Claude Desktop and Cursor.Architecture OverviewIn this lab, we simulate the full MCP lifecycle locally using Standard IO (stdio).FileMCP RoleDescriptionmain_mcp.pyMCP Host & ClientActs as the AI Application (like Cursor/Claude). It initiates the connection, manages the session, and orchestrates the AI loop.agent_mcp.pyMCP ServerActs as the Tool Provider. It holds the CRM data and exposes specific capabilities (add_customer, get_customer) to the Host.MCP Flow DiagramCode snippetsequenceDiagram
-    participant H as 🖥️ MCP Host (main_mcp.py)
-    participant C as 🔌 MCP Client (Internal)
-    participant S as 🛠️ MCP Server (agent_mcp.py)
-    participant DB as 🗄️ CRM Data (Memory)
+---
 
-    Note over H, S: Transport: Standard IO (stdin/stdout)
+## &#129513; Part 2: Model Context Protocol (MCP) with RAG
 
-    H->>S: Initialize Connection
-    S-->>H: Handshake (Protocol Version)
+This section covers the Model Context Protocol (MCP) implementation, updated with **Retrieval-Augmented Generation (RAG)**. This demonstrates a standardized Host <-> Client <-> Server architecture where the agent can consult a knowledge base before acting.
+
+**&#9888;&#65039; Note on Security:** Unlike Part 1 (REST API), this MCP implementation currently operates **without Authentication or Authorization (AuthN/AuthZ)**. The Host trusts the Server implicitly over the stdio transport layer.
+
+### Architecture Overview
+In this lab, we simulate the full MCP lifecycle locally using Standard IO (stdio). The agent is now capable of "Reasoning" by reading documentation before taking action.
+
+| MCP Role | File | Description |
+| :--- | :--- | :--- |
+| **MCP Host** | `mcp_host_client.py` | Acts as the AI Application. It includes the "Brain" (LLM) and the System Prompt that enforces a strict "Check Policy -> Act" workflow. |
+| **MCP Server** | `mcp_server.py` | Acts as the Tool Provider. It exposes capabilities (`process_refund`) and a knowledge base search (`search_knowledge_base`). |
+| **Ingestion** | `ingest.py` | (Optional) Pre-processes documents into a format the server can search. |
+
+### MCP Flow Diagram with RAG
+This updated diagram shows the agent consulting the Knowledge Base (RAG) before executing a transaction.
+
+```mermaid
+sequenceDiagram
+    participant U as &#128100; User
+    participant H as &#128421;&#65039; MCP Host (Client)
+    participant S as &#128736;&#65039; MCP Server
+    participant KB as &#128218; Knowledge Base (RAG)
+    participant DB as &#128452; Database
+
+    Note over H, S: Transport: Standard IO (No Auth)
+
+    U->>H: "Refund order 123 for damage"
     
-    H->>S: List Tools?
-    S-->>H: Returns: [add_customer, get_customer]
+    Note right of H: System Prompt: "Check Policy First!"
     
-    Note over H: Host receives user prompt: "Add Alice"
+    H->>S: Call Tool: search_knowledge_base(query="damage")
+    S->>KB: Query Vector/Text Search
+    KB-->>S: Return "Policy: Damage refund allowed < 30 days"
+    S-->>H: Return Policy Details
     
-    H->>C: Call Tool: add_customer(name="Alice")
-    C->>S: JSON-RPC Request
-    S->>DB: Write to CRM
-    S-->>C: Return "Success"
-    C-->>H: Display Result
-🚀 Running the MCP LabThis implementation requires the mcp python SDK.1. Install Additional DependencyBashpip install mcp
-2. Run the HostYou only need to run the Host script. The Host automatically launches the Server as a subprocess.Bashpython main_mcp.py
-3. Expected OutputPlaintextConnecting to server script: agent_mcp.py...
-Connected to server: CRM-MCP-Server
-Server capabilities: {'tools': ...}
-...
-User: I need to add a customer named Alice...
-Tool Output: Customer Alice added to CRM.
-🛠️ File DetailsThe Server (agent_mcp.py)This file uses @mcp.tool() to expose Python functions to the AI. It is completely isolated from the AI model itself—it simply executes logic when asked.Python@mcp.tool()
-def add_customer(name: str, email: str) -> str:
-    # Logic to add customer to database
-    return "Success"
-The Host (main_mcp.py)This file contains the MCP Client. It uses StdioServerParameters to tell the system how to start the server.Pythonserver_params = StdioServerParameters(
-    command="python",
-    args=["agent_mcp.py"] # The Host launches the Server
-)
-🧠 Key Takeaways for FDEsPortability: The agent_mcp.py server you built here can be plugged into Claude Desktop, Cursor, or VS Code without changing a single line of code.Security: The Host (AI) is isolated from the Server (Data). The Server defines strict boundaries on what the AI can and cannot do.
+    Note right of H: LLM Reasons: "Policy allows this."
+    
+    H->>S: Call Tool: process_refund(order_id="123")
+    S->>DB: Execute Refund
+    S-->>H: Return "Success"
+    
+    H-->>U: Final Answer: "Refund processed per policy."
+```
+
+### &#128640; Running the MCP Lab
+
+**1. Install Additional Dependency**
+```bash
+pip install mcp anthropic openai
+```
+*(Ensure you have the relevant API key set in your environment variables)*
+
+**2. Run the Host**
+You only need to run the Host script. The Host automatically launches the Server as a subprocess.
+```bash
+python mcp_host_client.py
+```
+
+**3. Expected Output (Happy Path)**
+```text
+&#128268; Connecting to MCP Server...
+&#9989; Connected! Found tools: ['search_knowledge_base', 'process_refund']
+
+&#128100; Query: Refund ORD-123 because it arrived damaged.
+&#129302; Agent decided to use 1 tool(s)...
+   Executing: search_knowledge_base({'query': 'refund policy for damaged products'})
+   Result: RELAVANT POLICY RULES: For cosmetic damage...
+
+&#129302; Answer: I have verified the policy. Processing your refund now...
+   Executing: process_refund({'order_id': 'ORD-123'})
+   Result: Success.
+```
+
+### &#128736;&#65039; File Details
+
+**The Server (`mcp_server.py`)**
+Uses `@mcp.tool()` to expose Python functions. It now includes RAG capabilities.
+```python
+@mcp.tool()
+async def search_knowledge_base(query: str) -> str:
+    """Searches the internal documentation for policies."""
+    # ... Implementation ...
+```
+
+**The Host (`mcp_host_client.py`)**
+This is the "Brain" that orchestrates the logic. It includes a specific System Prompt to prevent hallucinations and enforce policy checks.
+```python
+SYSTEM_PROMPT = """
+CRITICAL WORKFLOW:
+1. VERIFY FIRST: Use `search_knowledge_base`
+2. CHECK ELIGIBILITY
+3. EXECUTE: Call `process_refund` ONLY if allowed.
+"""
+```
+
+### &#129504; Key Takeaways
+* **RAG + Actions:** The agent doesn't just chat; it uses read-only tools (Search) to inform write-access tools (Refunds).
+* **Bureaucratic Agents:** By manipulating the System Prompt in the Host, we can force the AI to follow strict corporate procedures (Search -> Verify -> Act).
+* **No Auth:** In this local MCP piping, security relies on the host environment. In a production implementation, you would need to wrap the MCP transport in a secure layer.
