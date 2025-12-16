@@ -18,7 +18,7 @@ Crucially, this demo implements **Zero Trust Security**. The AI Agent is not giv
 
 This diagram illustrates the secure request flow for the REST API demo. Note that the LLM *decides* the action, but the Python Runtime *injects* the credentials before hitting the API.
 
-`mermaid
+```mermaid
 sequenceDiagram
     participant U as &#128100; User
     participant A as &#129302; Python Agent Runtime
