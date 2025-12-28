@@ -36,9 +36,9 @@ source .venv/bin/activate
 ```
 
 ### 3. Configure API Keys
-Copy the `.env.example` file and add your OpenAI API key:
+Copy the `.env.example` file from the root directory and add your OpenAI API key:
 ```bash
-cp .env.example .env
+cp ../.env.example .env
 # Edit .env with your key
 ```
 
