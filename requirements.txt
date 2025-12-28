@@ -8,3 +8,5 @@ openai
 python-dotenv
 requests
 mcp
+ollama
+tabulate
