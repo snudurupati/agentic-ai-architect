@@ -65,4 +65,4 @@ The script will generate a clean comparison table:
 ## 🎯 Learning Objectives
 1. Understand the difference between TTFT and full-stream latency.
 2. Develop a "cost-conscious" mindset when choosing between proprietary and open-source models.
-3. Learn to handle non-determinism in your "CPU" calls.
+3. Learn to handle non-determinism in your "LLM(Stochastic CPU)" calls.

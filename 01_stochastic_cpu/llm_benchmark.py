@@ -59,7 +59,7 @@ def benchmark_ollama(prompt: str):
         messages=[{"role": "user", "content": prompt}]
     )
     end_ts = time.time()
-    # gpt-oss:20b running within ollama on your local machine costs $0 per 1M tokens
+    # gpt-oss:20b, running within ollama on your local machine costs $0 per 1M tokens
     return LLMBenchmarkResult(
         model_name="gpt-oss:20b",
         api_provider="ollama",
@@ -98,7 +98,7 @@ except Exception as e:
 
 # 4. Tabulate and print the results
 data = [result.model_dump() for result in results]
-print(tabulate(data, headers="keys", tablefmt="grid"))
+print(tabulate(data, headers="keys", tablefmt="psql"))
 
     
 

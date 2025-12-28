@@ -9,7 +9,7 @@ This repository hosts the code and curriculum for the 8-week "Agentic AI Archite
 | Week | Topic | Key Concepts |
 |------|-------|--------------|
 | **[Week 0](./00_agentic_data_engineer)** | **The Agentic Data Engineer** | *The original demo. How to start thinking like an agent.* |
-| **Week 1** | **The Stochastic CPU** | Latency, tokens, and the "new compute" mindset. |
+| **[Week 1](./01_stochastic_cpu)** | **The Stochastic CPU** | Latency, tokens, and the "new compute" mindset. |
 | **Week 2** | **Structured Output** | Making LLMs deterministic with Pydantic. |
 | **Week 3** | **RAG Fundamentals** | Vector databases, embeddings, and semantic search. |
 | **Week 4** | **Advanced RAG** | Hybrid search, re-ranking, and overcoming retrieval failures. |
