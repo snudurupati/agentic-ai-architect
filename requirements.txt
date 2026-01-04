@@ -10,3 +10,9 @@ requests
 mcp
 ollama
 tabulate
+langchain
+langchain_core
+langchain_openai
+langsmith
+openevals
+python-dotenv
