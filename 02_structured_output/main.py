@@ -82,5 +82,4 @@ def main():
     run_evaluation_suite(classification_logs)
 
 if __name__ == "__main__":
-
     main()
