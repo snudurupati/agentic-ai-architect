@@ -13,6 +13,10 @@ tabulate
 langchain
 langchain_core
 langchain_openai
+langchain-community
+langchain-chroma
 langsmith
 openevals
-python-dotenv
+tiktoken
+jupyter
+pymupdf
