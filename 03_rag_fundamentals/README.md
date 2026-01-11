@@ -21,3 +21,22 @@ Ensure you have the latest dependencies installed:
 ```bash
 pip install -r ../requirements.txt
 ```
+
+## Running the Notebook
+
+To run the notebook locally, follow these steps:
+
+1. **Set your OpenAI API Key:**
+   ```bash
+   export OPENAI_API_KEY=sk-proj-your-key
+   ```
+
+2. **Navigate to the folder:**
+   ```bash
+   cd 03_rag_fundamentals
+   ```
+
+3. **Launch the notebook:**
+   ```bash
+   jupyter notebook week_3_rag_etl_pipeline.ipynb
+   ```
