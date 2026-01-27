@@ -20,3 +20,5 @@ openevals
 tiktoken
 jupyter
 pymupdf
+python-arango
+matplotlib

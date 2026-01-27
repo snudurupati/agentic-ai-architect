@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Architect's Note: Use environment variables for credentials
+# Use environment variables for credentials
 ARANGO_URL = os.getenv("ARANGO_URL")
 ARANGO_PWD = os.getenv("ARANGO_PASSWORD") # Maps to ARANGO_PASSWORD in .env
 
