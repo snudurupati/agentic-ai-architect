@@ -1,4 +1,4 @@
-# 🚀 Advanced RAG: Graph vs Vector Bakeoff
+# 🚀 Advanced RAG: Vector Search vs GraphRAG Bakeoff
 
 This module demonstrates the difference between **Vector RAG** (semantic similarity) and **Graph RAG** (structural reasoning) using ArangoDB.
 
