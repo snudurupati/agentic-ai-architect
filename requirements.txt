@@ -22,3 +22,6 @@ jupyter
 pymupdf
 python-arango
 matplotlib
+langgraph
+arango-datasets
+mermaid-python
