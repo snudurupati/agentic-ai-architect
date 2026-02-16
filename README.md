@@ -14,7 +14,7 @@ This repository hosts the code and curriculum for the 8-week "Agentic AI Archite
 | **[Week 3](./03_rag_fundamentals)** | **RAG Fundamentals** | Vector databases, embeddings, and semantic search. |
 | **[Week 4](./04_advanced_rag)** | **Advanced RAG** | Hybrid search, re-ranking, and overcoming retrieval failures. |
 | **[Week 5](./05_agent_orchestration)** | **Agent Orchestration** | Moving from chains to state machines (LangGraph). |
-| **Week 6** | **Tools & MCP** | Giving agents "hands" (SQL, APIs) and the Model Context Protocol. |
+| **[Week 6](./06_multi_hop_reasoning_GraphRAG)** | **Multi-Hop Reasoning with GraphRAG** | Entity Resolution, Semantic Bridging and Explainable AI. |
 | **Week 7** | **Evals & Observability** | Testing the untestable: LLM-as-a-judge and tracing. |
 | **Week 8** | **Security & Guardrails** | Preventing prompt injection and PII leakage. |
 | **Capstone**| **Data Contract Validator** | A production agent that documents and validates schemas. |
