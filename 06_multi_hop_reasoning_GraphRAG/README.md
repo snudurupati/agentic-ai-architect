@@ -25,7 +25,7 @@ An agentic node built with **LangGraph** that proactively identifies **Stalled W
 ### 1. Configure the Substrate
 Connect to your ArangoDB instance and initialize the "Corporate Brain" schema.
 
-```bash
+
 # Clone the repository
 git clone [https://github.com/](https://github.com/)[your-username]/corporate-brain-week-6.git
 cd corporate-brain-week-6
