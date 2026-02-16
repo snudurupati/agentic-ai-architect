@@ -1,4 +1,4 @@
-# 🛠️ Week 6: Multi-Hop Reasoning with GraphRAG
+# 🛠️ Week 6: Tools, MCP, and Multi-Hop Graph RAG
 
 This module explores the integration of professional-grade tools and the **Model Context Protocol (MCP)** to enhance agent capabilities. We transition from basic retrieval to **Multi-Hop Retrieval** and **Entity Resolution** within a graph-based knowledge system.
 
@@ -15,13 +15,14 @@ This process involves identifying and merging duplicate or related entities with
 
 ## 📂 Notebooks
 
-- **[MultiHop_GraphRAG_Entity_Resolution.ipynb](file:///Users/snudurupati/Projects/agentic-ai-architect/06_multi_hop_reasoning_GraphRAG/MultiHop_GraphRAG_Entity_Resolution.ipynb)**: Advanced implementation of multi-hop traversal and entity deduplication logic.
+- **[MultiHop_GraphRAG_Entity_Resolution.ipynb](file:///Users/snudurupati/Projects/agentic-ai-architect/06_tools_and_mcp/MultiHop_GraphRAG_Entity_Resolution.ipynb)**: Advanced implementation of multi-hop traversal and entity deduplication logic.
 
 ## 🏗️ Getting Started
 
 ### Prerequisites
 1. **ArangoDB 3.12+**: Ensure your instance is running (preferably via Docker as shown in [Week 4](../04_advanced_rag/README.md)).
 2. **Environment Variables**: A `.env` file with `ARANGO_URL`, `ARANGO_PASSWORD`, and `OPENAI_API_KEY` (Refer to [Week 5](../05_agent_orchestration/README.md) for details).
+
 
 ## 🛠️ Data Infrastructure
 This module builds upon the `glass_box` database. Ensure the data generator from previous weeks has been executed to populate the base knowledge graph.
