@@ -15,7 +15,7 @@ This process involves identifying and merging duplicate or related entities with
 
 ## 📂 Notebooks
 
-- **[MultiHop_GraphRAG_Entity_Resolution.ipynb](file:///Users/snudurupati/Projects/agentic-ai-architect/06_multi_hop_reasoning_GraphRAG/MultiHop_GraphRAG_Entity_Resolution.ipynb)**: Advanced implementation of multi-hop traversal and entity deduplication logic.
+- **[MultiHop_GraphRAG_Entity_Resolution.ipynb](MultiHop_GraphRAG_Entity_Resolution.ipynb)**: Advanced implementation of multi-hop traversal and entity deduplication logic.
 
 ## 🏗️ Getting Started
 
