@@ -1,23 +1,37 @@
 # 🛠️ Week 6: Multi-Hop Reasoning with GraphRAG
 
-This module explores the integration of professional-grade tools and the **Model Context Protocol (MCP)** to enhance agent capabilities. We transition from basic retrieval to **Multi-Hop Retrieval** and **Entity Resolution** within a graph-based knowledge system.
+## 🧠 The Problem: Contextual Blindness
+Most internal AI initiatives fail because they treat enterprise knowledge as a stack of disconnected pages. This leads to **Contextual Drift**—where the AI loses the logical "thread" connecting a Slack conversation to a Jira ticket and its final GitHub commit. 
 
-## 🧠 Key Concepts
+This repository provides the framework to bridge that **"Semantic Gap"** using a deterministic reasoning engine.
 
-### 1. Model Context Protocol (MCP)
-MCP is an open standard that enables AI models to securely and consistently access data and tools across different platforms. We focus on building and consuming MCP servers to extend our agent's reach.
+---
 
-### 2. Multi-Hop Graph RAG
-Unlike single-step vector retrieval, Multi-Hop RAG traverses relationships in the knowledge graph (ArangoDB) to answer complex questions that require connecting multiple pieces of information (e.g., "Find the manager of the person who reported the security incident").
+## 🛠️ Repository Architecture
 
-### 3. Entity Resolution
-This process involves identifying and merging duplicate or related entities within the graph to maintain a "Single Source of Truth," ensuring the agent doesn't get confused by fragmented data.
+### 1. The Reasoning Substrate (ArangoDB)
+We use **ArangoDB** to solve the "Missing Middle" between raw data and LLM logic.
+* **Entity Resolution (ER):** Normalizing siloed aliases (e.g., `@Sreeram` on Slack vs `snudurupati` on Jira) into a unified Global Entity ID.
+* **Semantic Bridges:** Edge collections that define the logical "verbs" connecting disparate data points.
+* **Multi-Hop Pathfinder:** AQL-driven traversals that "walk" the graph from intent to technical resolution.
 
-## 📂 Notebooks
+### 2. The Gap Detector
+An agentic node built with **LangGraph** that proactively identifies **Stalled Work**—tasks marked "In Progress" in management tools that show zero activity in the codebase.
 
-- **[MultiHop_GraphRAG_Entity_Resolution.ipynb](MultiHop_GraphRAG_Entity_Resolution.ipynb)**: Advanced implementation of multi-hop traversal and entity deduplication logic.
+---
 
-## 🏗️ Getting Started
+## 🚀 Quick Start
+
+### 1. Configure the Substrate
+Connect to your ArangoDB instance and initialize the "Corporate Brain" schema.
+
+```bash
+# Clone the repository
+git clone [https://github.com/](https://github.com/)[your-username]/corporate-brain-week-6.git
+cd corporate-brain-week-6
+
+# Install dependencies
+pip install -r requirements.txt
 
 ### Prerequisites
 1. **ArangoDB 3.12+**: Ensure your instance is running (preferably via Docker as shown in [Week 4](../04_advanced_rag/README.md)).
