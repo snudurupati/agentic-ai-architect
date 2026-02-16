@@ -26,11 +26,11 @@ An agentic node built with **LangGraph** that proactively identifies **Stalled W
 Connect to your ArangoDB instance and initialize the "Corporate Brain" schema.
 
 
-# Clone the repository
+### Clone the repository
 git clone [https://github.com/](https://github.com/)[your-username]/corporate-brain-week-6.git
 cd corporate-brain-week-6
 
-# Install dependencies
+## Install dependencies
 pip install -r requirements.txt
 
 ### Prerequisites
