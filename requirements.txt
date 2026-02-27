@@ -25,3 +25,6 @@ matplotlib
 langgraph
 arango-datasets
 mermaid-python
+pandas
+datasets
+mlx-lm

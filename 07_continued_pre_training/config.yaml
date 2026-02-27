@@ -1,0 +1,16 @@
+
+model: "mlx-community/Meta-Llama-3-8B-Instruct-4bit"
+train: true
+data: "data/" 
+
+# Training Hyperparameters
+batch_size: 1
+iters: 500
+learning_rate: 1e-5
+steps_per_report: 10
+steps_per_eval: 100
+
+# LoRA Specifics
+adapter_path: "adapters.safetensors"
+rank: 16
+lora_layers: 8 
