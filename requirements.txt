@@ -28,3 +28,4 @@ mermaid-python
 pandas
 datasets
 mlx-lm
+neo4j
