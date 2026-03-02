@@ -16,8 +16,7 @@ This repository hosts the code and curriculum for the 8-week "Agentic AI Archite
 | **[Week 5](./05_agent_orchestration)** | **Agent Orchestration** | Moving from chains to state machines (LangGraph). |
 | **[Week 6](./06_multi_hop_reasoning_GraphRAG)** | **Multi-Hop Reasoning with GraphRAG** | Entity Resolution, Semantic Bridging and Explainable AI. |
 | **[Week 7](./07_continued_pre_training)** | **Continued Pre-Training** | Testing the untestable: LLM-as-a-judge and tracing. |
-| **Week 8** | **Security & Guardrails** | Preventing prompt injection and PII leakage. |
-| **Capstone**| **Data Contract Validator** | A production agent that documents and validates schemas. |
+| **[Week 8](./08_graph_substrate_capstone)** | **The Showdown** | CPT vs. GraphRAG Head-to-Head. |
 
 ## 🚀 Getting Started
 1. Clone the repo:
