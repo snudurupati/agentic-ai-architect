@@ -15,8 +15,8 @@ This repository hosts the code and curriculum for the 8-week "Agentic AI Archite
 | **[Week&nbsp;4](./04_advanced_rag)** | **Advanced RAG** | Hybrid search, re-ranking, and overcoming retrieval failures. |
 | **[Week&nbsp;5](./05_agent_orchestration)** | **Agent Orchestration** | Moving from chains to state machines (LangGraph). |
 | **[Week&nbsp;6](./06_multi_hop_reasoning_GraphRAG)** | **Multi-Hop Reasoning with GraphRAG** | Entity Resolution, Semantic Bridging and Explainable AI. |
-| **[Week&nbsp;7](./07_continued_pre_training)** | **Continued Pre-Training** | Baking in parametric knowledge |
-| **[Week&nbsp;8](./08_graph_substrate_capstone)** | **The Showdown** | CPT vs. GraphRAG Head-to-Head. |
+| **[Week&nbsp;7](./07_continued_pre_training)** | **Continued Pre-Training** | Model Fine-Tuning using CPT |
+| **[Week&nbsp;8](./08_graph_substrate_capstone)** | **The Bake-off** | CPT vs. GraphRAG Head-to-Head. |
 
 ## 🚀 Getting Started
 1. Clone the repo:
