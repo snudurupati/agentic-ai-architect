@@ -15,8 +15,8 @@ This project is the culmination of a step-by-step evolution from Data Engineerin
 | **[Week 4](./04_advanced_rag)** | **Advanced RAG** | Hybrid search, re-ranking, and overcoming retrieval failures. |
 | **[Week 5](./05_agent_orchestration)** | **Agent Orchestration** | Moving from chains to state machines (LangGraph). |
 | **[Week 6](./06_multi_hop_reasoning_GraphRAG)** | **Multi-Hop Reasoning with GraphRAG** | Entity Resolution, Semantic Bridging and Explainable AI. |
-| **[Week 7](./07_continued_pre_training)** | **Continued Pre-Training** | Testing the untestable: LLM-as-a-judge and tracing. |
-| **[Week 8](./08_graph_substrate_capstone)** | **The Showdown** | CPT vs. GraphRAG Head-to-Head. |
+| **[Week 7](./07_continued_pre_training)** | **Continued Pre-Training** | Model Fine-tuning using CPT |
+| **[Week 8](./08_graph_substrate_capstone)** | **The Bake-off** | CPT vs. GraphRAG Head-to-Head. |
 
 ---
 
